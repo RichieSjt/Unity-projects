@@ -1,0 +1,44 @@
+
+newmtl Ocean (Instance)
+Ka  0.4 0.4 0.4
+Kd  0 0.7058824 0.6470588
+Ks  0.0 0.0 0.0
+d  0.627451
+Ns  0.0
+illum 2
+
+
+
+
+newmtl MHum1 (Instance)
+Ka  0.4 0.4 0.4
+Kd  0.6156863 0.7843137 0.5137255
+Ks  0.0 0.0 0.0
+d  1
+Ns  0.0
+illum 2
+
+
+
+
+newmtl MHum0 (Instance)
+Ka  0.4 0.4 0.4
+Kd  0.8666667 0.9411765 0.4392157
+Ks  0.0 0.0 0.0
+d  1
+Ns  0.0
+illum 2
+
+
+
+
+newmtl MHum2 (Instance)
+Ka  0.4 0.4 0.4
+Kd  0.3254902 0.6039216 0.6039216
+Ks  0.0 0.0 0.0
+d  1
+Ns  0.0
+illum 2
+
+
+
