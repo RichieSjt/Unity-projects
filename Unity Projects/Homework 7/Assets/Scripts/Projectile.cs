@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour{
     private Vector3 shootDirection;
     public float speed = 20f;
     public int damage = 20;
+    public bool enemyShooting = false;
+    public bool bigProjectile = false;
 
     public void Setup(Vector3 shootDirection){
         this.shootDirection = shootDirection;
@@ -18,7 +20,21 @@ public class Projectile : MonoBehaviour{
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag == "Enemy" || collision.tag == "Meteor" || collision.tag == "EnemyMissile")
-            Destroy(gameObject);
+        if(enemyShooting){
+            if (collision.tag == "Player" || collision.tag == "Planet" && !bigProjectile){
+                SoundManagerScript.PlaySound("normalHit");
+                Destroy(gameObject);
+            }else if(collision.tag == "Player" || collision.tag == "Planet" && bigProjectile) {
+                SoundManagerScript.PlaySound("bigHit");
+                Destroy(gameObject);
+            }
+
+        }else{
+            if (collision.tag == "Enemy" || collision.tag == "Planet"){
+                SoundManagerScript.PlaySound("normalHit");
+                Destroy(gameObject);
+            }
+        }
+        
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Planet
   - Habitant
+  - Enemy
   layers:
   - Default
   - TransparentFX

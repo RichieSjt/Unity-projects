@@ -35,5 +35,6 @@ public class PlayerController : MonoBehaviour{
     private void Shoot(Vector3 shootDirection) {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         projectile.GetComponent<Projectile>().Setup(shootDirection);
+        SoundManagerScript.PlaySound("normalShoot");
     }
 }

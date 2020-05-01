@@ -11,6 +11,17 @@ public class HabitantController : MonoBehaviour{
         this.shootDirection = shootDirection;
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(shootDirection * speed, ForceMode2D.Impulse);
+        Destroy(gameObject, 12f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.tag == "Player"){
+            ScoreScript.scoreValue += 100;
+            Destroy(gameObject);
+        }else if(collision.tag == "Enemy"){
+            ScoreScript.scoreValue -= 10;
+            Destroy(gameObject);
+        }
     }
 
 }
