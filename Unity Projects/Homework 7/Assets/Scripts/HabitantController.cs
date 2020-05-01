@@ -6,12 +6,13 @@ public class HabitantController : MonoBehaviour{
     private Rigidbody2D rb;
     private Vector3 shootDirection;
     public float speed = 2f;
+    public float lifeSpan = 20f;
 
     public void Setup(Vector3 shootDirection){
         this.shootDirection = shootDirection;
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(shootDirection * speed, ForceMode2D.Impulse);
-        Destroy(gameObject, 12f);
+        Destroy(gameObject, lifeSpan);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

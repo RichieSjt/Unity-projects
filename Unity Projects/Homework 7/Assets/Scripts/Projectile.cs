@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour{
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(shootDirection * speed, ForceMode2D.Impulse);
 
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 8f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

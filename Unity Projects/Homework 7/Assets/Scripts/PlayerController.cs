@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour{
     public Transform firePoint;
     public Transform firePointEnd;
     public Transform followPoint;
+    private HealthSystem healthSystem;
 
     public float speed = 3.0f;
     public float rotationSpeed = 3.0f;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour{
 
     void Start(){
         rb = GetComponent<Rigidbody2D>();
+        healthSystem = GetComponent<HealthSystem>();
     }
 
     void FixedUpdate(){
@@ -36,5 +38,20 @@ public class PlayerController : MonoBehaviour{
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         projectile.GetComponent<Projectile>().Setup(shootDirection);
         SoundManagerScript.PlaySound("normalShoot");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.tag == "EnemyProjectile"){  
+            Projectile projectile = collision.GetComponent<Projectile>();
+            healthSystem.TakeDamage(projectile.damage);
+
+            if(healthSystem.health <= 0){
+                Destroy(gameObject);
+            }
+
+            Debug.Log("Player ship Health: " + healthSystem.health);
+
+        }
+    
     }
 }

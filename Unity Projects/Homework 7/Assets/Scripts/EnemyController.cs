@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour{
     public Transform firePoint;
     public Transform firePointEnd;
     public Transform followTarget;
+    private HealthSystem healthSystem;
    
     private Vector3 shootDirection;
 
@@ -22,6 +23,12 @@ public class EnemyController : MonoBehaviour{
     void Start(){
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("Shoot", 0f, shootRepeat);
+        healthSystem = GetComponent<HealthSystem>();
+        if(!isBig){
+            followTarget = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        }else{
+            followTarget = GameObject.FindGameObjectWithTag("Planet").GetComponent<Transform>();
+        }
     }
 
     void FixedUpdate(){
@@ -53,6 +60,33 @@ public class EnemyController : MonoBehaviour{
             SoundManagerScript.PlaySound("bigShoot");
         }else{
             SoundManagerScript.PlaySound("enemyShoot");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        
+        if(collision.tag == "PlayerProjectile"){  
+            Projectile projectile = collision.GetComponent<Projectile>();
+            healthSystem.TakeDamage(projectile.damage);
+
+            if(healthSystem.health <= 0){
+                Destroy(gameObject);
+                if(isBig)
+                    ScoreScript.scoreValue += 1000;
+                else
+                    ScoreScript.scoreValue += 200;
+            }
+
+            Debug.Log("Enemy ship Health: " + healthSystem.health);
+
+        }
+    
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.gameObject.tag == "Planet" && !isBig || collision.gameObject.tag == "Player" && !isBig){
+            Destroy(gameObject);
+            ScoreScript.scoreValue += 20;
         }
     }
 
