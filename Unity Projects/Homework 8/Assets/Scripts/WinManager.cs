@@ -9,7 +9,7 @@ public class WinManager : MonoBehaviour{
     
     public static WinManager instance; 
 
-    private void Awake()
+    private void Start()
     {
         instance = this;
         playerWon = false;
@@ -18,8 +18,11 @@ public class WinManager : MonoBehaviour{
 
     public void CheckWin()
     {
-        Debug.Log(diamondsCounter);
+        Debug.Log("Diamonds counter: " + diamondsCounter);
         if(diamondsCounter == 3)
+        {
             playerWon = true;
+            WinnerTextDisplay.instance.displayMessage();
+        }
     }
 }

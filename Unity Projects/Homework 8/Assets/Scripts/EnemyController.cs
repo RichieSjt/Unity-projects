@@ -13,10 +13,15 @@ public class EnemyController : MonoBehaviour{
     {
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
+        
     }
 
     private void Update() 
     {
+        //Disabling enemies if player won
+        if(WinManager.instance.playerWon == true)
+            return;
+            
         float distance = Vector3.Distance(target.position, transform.position);
 
         if(distance <= lookRadius)

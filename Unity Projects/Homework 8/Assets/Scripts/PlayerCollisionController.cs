@@ -8,11 +8,9 @@ public class PlayerCollisionController : MonoBehaviour{
     {
         if(other.gameObject.CompareTag("Item"))
         {
-            Destroy(other.gameObject);
             WinManager.instance.diamondsCounter += 1;
-            Debug.Log("Picking up diamond");
-            Debug.Log(WinManager.instance.diamondsCounter);
             WinManager.instance.CheckWin();
+            Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("Water") || other.gameObject.CompareTag("Enemy"))
         {
