@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour{
         {
             Destroy(other.gameObject);
         }
+        if(other.gameObject.CompareTag("Water"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 
 }
